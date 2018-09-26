@@ -18,7 +18,7 @@ public class Primes {
         for (long i = 2; ; ++i) {
             boolean isPrime = true;
             for (Long prime : primes) {
-                if (prime*prime > i) {
+                if (prime * prime > i) {
                     // Check only until sqrt
                     break;
                 }
@@ -36,5 +36,19 @@ public class Primes {
                 }
             }
         }
+    }
+
+    public static boolean isPrime(long p) {
+        if (p <= 1) {
+            return false;
+        }
+
+        for (long l = 2; l <= Math.sqrt(p); ++l) {
+            if (p % l == 0) {
+                return false;
+            }
+        }
+        return true;
+
     }
 }

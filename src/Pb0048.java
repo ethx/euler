@@ -15,6 +15,6 @@ public class Pb0048 {
             }
             res = (res + tmp) % RES_MODULO;
         }
-        System.out.println(String.format("Pb0066: %d", res));
+        System.out.println(String.format("Pb0048: %d", res));
     }
 }
