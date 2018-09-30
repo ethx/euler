@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility methods for primes
@@ -36,6 +37,29 @@ public class Primes {
                 }
             }
         }
+    }
+
+    public static List<Long> getPrimesUntil(long max) {
+        List<Long> primes = new ArrayList<>();
+        for (long i = 2; i <= max; ++i) {
+            boolean isPrime = true;
+            for (Long prime : primes) {
+                if (prime * prime > i) {
+                    // Check only until sqrt
+                    break;
+                }
+
+                if (i % prime == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                // prime because not divisible by any previous prime
+                primes.add(i);
+            }
+        }
+        return primes;
     }
 
     public static boolean isPrime(long p) {
