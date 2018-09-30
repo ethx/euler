@@ -60,4 +60,8 @@ public class Integers {
         throw new RuntimeException("still not found after 1_000 iterations: " + input);
     }
 
+    public static boolean isSquare(long in) {
+        long sqrt = (long) Math.sqrt(in);
+        return (sqrt*sqrt == in);
+    }
 }
