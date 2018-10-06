@@ -1,7 +1,10 @@
 package utils;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -63,5 +66,76 @@ public class Integers {
     public static boolean isSquare(long in) {
         long sqrt = (long) Math.sqrt(in);
         return (sqrt*sqrt == in);
+    }
+
+    public static Set<Long> primeFactors(long in) {
+        if (in < 2) {
+            return new HashSet<>();
+        }
+        Set<Long> primeFactors = new HashSet<>();
+        List<Long> primesCache = Primes.getPrimesUntil((long)Math.sqrt(in));
+
+        for (long current = in; current != 1;) {
+            if (Primes.isPrime(current)) {
+                // last prime factor
+                primeFactors.add(current);
+                break;
+            }
+            for (long prime : primesCache) {
+                if (prime * prime > current) {
+                    // nothing divides the current number
+                    primeFactors.add(current);
+                    break;
+                }
+                if (current % prime == 0) {
+                    primeFactors.add(prime);
+                    current = current / prime;
+                    break;
+                }
+            }
+        }
+
+        return primeFactors;
+    }
+
+    public static Map<Long, Integer> primeDecomposition(long in) {
+        if (in < 2) {
+            return new HashMap<>();
+        }
+        Map<Long, Integer> primeFactors = new HashMap<>();
+        List<Long> primesCache = Primes.getPrimesUntil((long)Math.sqrt(in));
+
+        for (long current = in; current != 1;) {
+            if (Primes.isPrime(current)) {
+                // last prime factor
+                primeFactors.compute(current, (k, v) -> 1 + (v == null ? 0 : v));
+                break;
+            }
+            for (long prime : primesCache) {
+                if (prime * prime > current) {
+                    // nothing divides the current number
+                    primeFactors.compute(current, (k, v) -> 1 + (v == null ? 0 : v));
+                    break;
+                }
+                if (current % prime == 0) {
+                    primeFactors.compute(prime, (k, v) -> 1 + (v == null ? 0 : v));
+                    current = current / prime;
+                    break;
+                }
+            }
+        }
+
+        return primeFactors;
+    }
+
+    public static Set<Long> divisors(long in) {
+        Set<Long> divisors = new HashSet<>();
+        for (long i = 1; i*i <= in; ++i) {
+            if (in % i == 0) {
+                divisors.add(i);
+                divisors.add(in/i);
+            }
+        }
+        return divisors;
     }
 }
