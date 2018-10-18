@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 
 /**
- * https://projecteuler.net/problem=19
+ * https://projecteuler.net/problem=20
  */
 public class Pb0020 {
 
