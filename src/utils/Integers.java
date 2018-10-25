@@ -1,6 +1,7 @@
 package utils;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -137,5 +138,14 @@ public class Integers {
             }
         }
         return divisors;
+    }
+
+    public static List<Integer> extractDigits(long l) {
+        List<Integer> res = new ArrayList<>();
+        while (l>0) {
+            res.add((int)(l%10));
+            l/=10;
+        }
+        return res;
     }
 }
